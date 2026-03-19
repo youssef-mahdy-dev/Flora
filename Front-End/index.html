@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLORA - Your AI Plant Doctor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="img/logo.jpeg" alt="FLORA Logo">
+            <span>FLORA</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it works</a>
+            <button class="nav-btn">Get Started</button>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="main-container">
+            <h1 class="main-title">AI Plant Doctor — <span>Diagnosis & Care Plans</span></h1>
+            <p class="sub-title">Instantly identify plant diseases and get professional treatment protocols using advanced AI technology.</p>
+            
+            <div class="upload-card">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <h3>Upload your plant photo</h3>
+                <p>Drag & drop or click to select a clear image</p>
+                
+                <input type="file" id="file-input" hidden accept="image/*">
+                <button class="select-btn" onclick="document.getElementById('file-input').click()">
+                    <i class="fas fa-camera"></i> Select Photo
+                </button>
+                
+                <div id="preview-container">
+                    <img id="image-preview" src="" alt="Preview">
+                </div>
+
+                <button id="analyze-btn" class="analyze-btn" disabled>
+                    Start AI Diagnosis <i class="fas fa-magic"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <h2 class="section-label">Features</h2>
+        <h2 class="section-title">Everything you need to care for your plants</h2>
+        <div class="features-grid">
+            <div class="feature-box">
+                <i class="fas fa-microscope"></i>
+                <h3>AI Diagnosis</h3>
+                <p>Professional grade pathology analysis for over 100+ plant species.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>Care Protocols</h3>
+                <p>Customized treatment plans including watering and fertilizer schedules.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-bell"></i>
+                <h3>Smart Reminders</h3>
+                <p>Never forget to water your plants with intelligent notifications.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison">
+        <h2 class="section-label">Results</h2>
+        <h2 class="section-title">See the Difference</h2>
+        <div class="comparison-container">
+            <div class="compare-card">
+                <img src="img/unnamed.jpg" alt="Before">
+                <!-- <span class="label sick">Before (Sick)</span> -->
+            </div>
+            <!-- <div class="compare-card">
+                <img src="https://via.placeholder.com/400x300/dcfce7/166534?text=Healthy+Plant" alt="After">
+                <span class="label healthy">After (Treated)</span>
+            </div> -->
+        </div>
+    </section>
+
+    <div class="floating-chat">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <script>
+
+window.onload = () => {
+    const token = localStorage.getItem('accessToken');
+    const userName = localStorage.getItem('userName');
+    const authBtn = document.querySelector('.nav-btn'); // زرار Get Started
+    const navLinks = document.querySelector('.nav-links');
+
+    if (token && userName) {
+        // --- حالة تسجيل الدخول ---
+        
+        // 1. تغيير الزرار ليكون Logout
+        authBtn.innerText = 'Logout';
+        authBtn.style.background = '#e63946'; // لونه أحمر
+        authBtn.onclick = handleLogout; // ربط دالة الخروج بالزرار
+
+        // 2. إضافة كلمة ترحيب قبل اللينكات
+        const welcomeMsg = document.createElement('span');
+        welcomeMsg.innerText = `Hi, ${userName} | `;
+        welcomeMsg.style.fontWeight = 'bold';
+        welcomeMsg.style.color = '#2d6a4f';
+        navLinks.prepend(welcomeMsg);
+    } else {
+        // --- حالة عدم تسجيل الدخول ---
+        authBtn.onclick = () => {
+            window.location.href = 'auth/login/login.html';
+        };
+    }
+};
+
+async function handleLogout() {
+    const token = localStorage.getItem('accessToken');
+
+    // إذا لم يوجد توكن، امسح الداتا وارجع للوجن وخلاص
+    if (!token) {
+        localStorage.clear();
+        window.location.href = 'auth/login/login.html';
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/api/v1/auth/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (response.ok) {
+            alert("Logged out successfully");
+        }
+    } catch (err) {
+        console.error("Server logout failed, clearing local data anyway.");
+    } finally {
+        // في كل الحالات (نجاح أو فشل السيرفر) بنمسح الداتا من المتصفح
+        localStorage.clear();
+        window.location.href = 'auth/login/login.html';
+    }
+}
+// دالة الـ Logout
+async function handleLogout() {
+    const token = localStorage.getItem('accessToken');
+
+    try {
+        const response = await fetch('http://localhost:3000/api/v1/auth/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // مهم جداً عشان الـ authentication() middleware
+            }
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message); // "Logged out successfully"
+            // مسح البيانات من المتصفح
+            localStorage.clear(); 
+            // تحويل لصفحة اللوجن أو تحديث الصفحة
+            window.location.href = 'auth/login/login.html';
+        }
+    } catch (err) {
+        console.error("Logout failed", err);
+        // حتى لو السيرفر فيه مشكلة، امسح التوكن محلياً للأمان
+        localStorage.clear();
+        window.location.reload();
+    }
+}
+        const fileInput = document.getElementById('file-input');
+        const preview = document.getElementById('image-preview');
+        const analyzeBtn = document.getElementById('analyze-btn');
+
+        fileInput.onchange = (e) => {
+            const [file] = fileInput.files;
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.parentElement.style.display = 'block';
+                analyzeBtn.disabled = false;
+                analyzeBtn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>

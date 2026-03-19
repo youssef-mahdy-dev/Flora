@@ -1,0 +1,113 @@
+/* مثال سريع */
+body {
+  font-family: sans-serif;
+  background: #f9fbf9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.auth-box {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  width: 350px;
+  text-align: center;
+}
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.auth-btn {
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* حاوية الرسائل */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* شكل الرسالة نفسها */
+.toast {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    min-width: 250px;
+    animation: slideIn 0.5s ease-out forwards; /* أنيميشن دخول */
+    border-left: 5px solid transparent;
+}
+
+/* حالة النجاح (أخضر) */
+.toast.success {
+    border-left-color: #2d6a4f;
+    color: #1b4332;
+}
+
+/* حالة الخطأ (أحمر) */
+.toast.error {
+    border-left-color: #e63946;
+    color: #85141b;
+}
+
+/* حركة الدخول من اليمين */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* حركة الخروج */
+.toast.fade-out {
+    animation: fadeOut 0.5s ease-in forwards;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; transform: translateY(-20px); }
+}
+
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%; /* عشان ياخد المساحة كاملة */
+    padding-right: 45px; /* مسافة للأيقونة عشان الكلام ميركبش عليها */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+    z-index: 10;
+}
+
+.toggle-password:hover {
+    color: #2d6a4f; /* لون FLORA بتاعنا */
+}

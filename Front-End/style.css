@@ -1,0 +1,94 @@
+:root {
+    --primary-green: #2d6a4f;
+    --light-green: #d8f3dc;
+    --accent-blue: #0091ea;
+    --text-dark: #1b4332;
+    --bg-soft: #f9fbf9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-soft);
+    color: var(--text-dark);
+    scroll-behavior: smooth;
+}
+
+/* Header */
+header {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.logo-container { display: flex; align-items: center; gap: 10px; }
+.logo-container img { height: 40px; }
+.logo-container span { font-size: 24px; font-weight: bold; color: var(--primary-green); }
+
+.nav-links a { text-decoration: none; color: #555; margin: 0 15px; font-weight: 500; }
+.nav-btn { background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; }
+
+/* Hero Section */
+.hero { padding: 80px 20px; text-align: center; background: radial-gradient(circle at top right, #e8f5e9, transparent); }
+.main-title { font-size: 42px; margin-bottom: 10px; }
+.main-title span { color: var(--primary-green); }
+.sub-title { color: #666; max-width: 600px; margin: 0 auto 40px; }
+
+/* Upload Card */
+.upload-card {
+    background: white;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    border: 2px dashed #ccd5ae;
+}
+
+.upload-icon { font-size: 50px; color: #a3b18a; margin-bottom: 20px; }
+.select-btn { background: var(--accent-blue); color: white; border: none; padding: 15px 30px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.select-btn:hover { background: #0077c2; }
+
+#preview-container { margin-top: 20px; display: none; }
+#image-preview { max-width: 100%; border-radius: 15px; max-height: 300px; }
+
+.analyze-btn {
+    width: 100%; margin-top: 25px; padding: 18px; border-radius: 15px; border: none;
+    background: #cbd5e0; color: white; font-size: 18px; font-weight: bold; cursor: not-allowed;
+}
+.analyze-btn.active { background: var(--primary-green); cursor: pointer; box-shadow: 0 10px 20px rgba(45,106,79,0.3); }
+
+/* Features */
+.features { padding: 80px 8%; text-align: center; }
+.section-label { color: var(--primary-green); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+.section-title { font-size: 32px; margin-bottom: 50px; }
+
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+.feature-box { background: white; padding: 30px; border-radius: 20px; transition: 0.3s; }
+.feature-box i { font-size: 40px; color: var(--primary-green); margin-bottom: 20px; }
+.feature-box:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+/* Comparison */
+.comparison { padding: 80px 8%; background: #fff; text-align: center; }
+.comparison-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
+.compare-card { position: relative; max-width: 700px; border-radius: 20px; overflow: hidden; }
+.compare-card img { width: 100%; display: block; }
+.label { position: absolute; top: 15px; left: 15px; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; color: white; }
+.sick { background: #ef4444; }
+.healthy { background: #22c55e; }
+
+/* Chat Widget */
+.floating-chat {
+    position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+    background: linear-gradient(135deg, #2d6a4f, #52b788);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 24px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
