@@ -37,8 +37,7 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 * This project utilizes **Ollama** instead of Rasa for the chatbot implementation.
 * The backend is built using **Node.js (Express)** to ensure high performance and scalability, replacing the initial Django proposal.
 
-
-## Use Case Diagram
+## 📊 Use Case Diagram
 ```mermaid
 graph TD
     User((User)) -->|Upload Image| System[FLORA System]
@@ -47,28 +46,3 @@ graph TD
     System --> Chatbot[Chatbot: Ollama LLM]
     ML -->|Prediction| User
     Chatbot -->|Response| User
-
-
-    # Clone the repository
-git clone [https://github.com/youssef-mahdy-dev/Flora.git](https://github.com/youssef-mahdy-dev/Flora.git)
-
-# Navigate to project directory
-cd flora
-
-# Install dependencies
-npm install
-
-# Run the backend
-node app.js
-
-# Run Ollama (ensure it's installed)
-ollama run llama3
-
-flora/
-├── backend/
-├── frontend/
-├── models/
-├── chatbot/
-├── dataset/
-└── README.md
-
