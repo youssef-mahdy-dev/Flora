@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email - FLORA</title>
+    <link rel="stylesheet" href="confirm.email..css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+</head>
+<body>
+<div class="auth-box">
+    <div class="icon-header">
+        <img src="../../img/logo.jpeg" alt="Logo" class="logo">
+    </div>
+    <h2>Verify Your Email</h2>
+    <p class="subtitle">Please enter the OTP code sent to your inbox to activate your account.</p>
+    
+    <div id="timer-container" class="timer-style">
+        Code expires in: <span id="countdown">05:00</span>
+    </div>
+
+    <form id="confirm-form">
+        <input type="email" id="email" placeholder="Confirm your email address" required>
+        
+        <div class="otp-container">
+            <input type="text" id="otp" placeholder="Enter 5-digit OTP" maxlength="5" required>
+        </div>
+
+        <button type="submit" class="auth-btn">Verify & Activate</button>
+    </form>
+    
+    <p class="footer-text">Didn't get the code? <span class="resend" id="resend-btn">Resend OTP</span></p>
+</div>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script>
+    // 1. دالة الرسائل الاحترافية (Toast)
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icon = type === 'success' ? '✅' : '❌';
+    toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('fade-out');
+        setTimeout(() => toast.remove(), 500);
+    }, 3000);
+}
+
+// 2. دالة العداد التنازلي
+function startTimer(duration, display) {
+    let timer = duration, minutes, seconds;
+    const btn = document.querySelector('.auth-btn');
+
+    const countdownInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            clearInterval(countdownInterval);
+            display.textContent = "EXPIRED";
+            btn.disabled = true;
+            btn.style.background = "#ccc";
+            btn.innerText = "OTP Expired";
+            showToast("The OTP has expired. Please signup again.", "error");
+        }
+    }, 1000);
+}
+
+// 3. معالجة إرسال الفورم
+const form = document.getElementById('confirm-form');
+form.onsubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+        email: document.getElementById('email').value,
+        otp: document.getElementById('otp').value
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/api/v1/auth/confirm-email', {
+            method: 'PATCH', 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            showToast("Email Verified Successfully! Redirecting...", "success");
+            setTimeout(() => {
+                window.location.href = '../login/login.html'; 
+            }, 2000);
+        } else {
+            showToast(result.message || "Invalid OTP", "error");
+        }
+    } catch (err) {
+        showToast("Connection Error! Check your server.", "error");
+    }
+};
+
+// تشغيل العداد عند التحميل
+window.onload = function () {
+    const display = document.querySelector('#countdown');
+    startTimer(60 * 5, display);
+};
+</script>
+
+</body>
+</html>

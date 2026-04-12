@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLORA | AI Plant Recognition</title>
+    <link rel="icon" href="img/coppy-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <meta content="img/coppy-removebg-preview.png" itemprop="img">
+</head>
+<body class="landing-page">
+
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-history"></i> History</h3>
+            <button id="closeSidebar"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="historyList" class="history-list"></div>
+    </div>
+
+    <div id="landingView">
+        <header>
+            <div class="logo-container">
+                <img src="img/coppy-removebg-preview.png" alt="FLORA Logo">
+                <span>FLORA</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" onclick="showSection('landing')">Home</a>
+                <a href="#features">Features</a>
+                <button class="nav-btn" onclick="showSection('app')">Launch App</button>
+                <button id="darkToggle" class="nav-btn-icon">🌙</button>
+            </nav>
+        </header>
+
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="fade-in">Intelligent Plant <span>Recognition</span> & Diagnosis</h1>
+                <p class="fade-in">An AI-powered system designed to identify plants, detect diseases, and provide treatment recommendations using Computer Vision and Ollama NLP.</p>
+                <div class="hero-btns fade-in">
+                    <button onclick="showSection('app')" class="cta-btn">Start Diagnosis <i class="fas fa-leaf"></i></button>
+                </div>
+            </div>
+            <div class="hero-image fade-in">
+                <img src="img/fotor-ai-20260404191050.jpg" alt="Plant Health">
+            </div>
+        </section>
+
+        <section id="features" class="features-grid">
+            <div class="feat-card">
+                <i class="fas fa-camera-retro"></i>
+                <h3>Plant Recognition</h3>
+                <p>Advanced Computer Vision models to identify species instantly.</p>
+            </div>
+            <div class="feat-card">
+                <i class="fas fa-microscope"></i>
+                <h3>Disease Detection</h3>
+                <p>Early-stage diagnosis of botanical infections with precision.</p>
+            </div>
+            <div class="feat-card">
+                <i class="fas fa-comments"></i>
+                <h3>Ollama Chatbot</h3>
+                <p>Interactive AI support for follow-up questions and plant care.</p>
+            </div>
+        </section>
+
+        <section class="tech-stack">
+            <h2>Our Tech Stack</h2>
+            <div class="tech-icons">
+                <span><i class="fab fa-node-js"></i> Node.js</span>
+                <span><i class="fas fa-brain"></i> Ollama AI</span>
+                <span><i class="fas fa-code"></i> Computer Vision</span>
+            </div>
+        </section>
+    </div>
+
+    <div id="appView" style="display:none;">
+    <main class="app-container">
+        <header class="app-header">
+            <button id="openSidebar" class="icon-btn"><i class="fas fa-bars"></i></button>
+            <div class="logo-small" onclick="showSection('landing')" style="cursor:pointer;">FLORA AI</div>
+            <button class="exit-link" onclick="showSection('landing')">Back to Home</button>
+        </header>
+
+        <div class="chat-interface">
+            <div class="new-chat-wrapper">
+                <button id="clearChatBtn" class="new-chat-btn">
+                    <i class="fas fa-plus"></i> New Chat
+                </button>
+            </div>
+
+            <div id="chatMessages" class="chat-window">
+                <div class="bot-msg">Welcome to FLORA. Upload a photo or ask me anything!</div>
+            </div>
+
+                <div id="analysisResult" class="analysis-box" style="display:none;">
+                    <div class="res-content">
+                        <h4>Analysis Result</h4>
+                        <p id="resText"></p>
+                        <small id="resTreatment"></small>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div id="imagePreviewContainer" class="preview-box" style="display:none;">
+                        <img id="imagePreview" src="">
+                        <button id="cancelUpload" class="close-prev"><i class="fas fa-times"></i></button>
+                    </div>
+                    
+                    <div class="input-row">
+                        <label for="fileInput" class="upload-btn">
+                            <i class="fas fa-image"></i>
+                            <input type="file" id="fileInput" accept="image/*" hidden>
+                        </label>
+                        <button id="micBtn" class="icon-btn"><i class="fas fa-microphone"></i></button>
+                        <input type="text" id="userInput" placeholder="Ask FLORA something...">
+                        <button id="analyzeBtn" class="action-btn primary" style="display:none;">Analyze Photo</button>
+                        <button id="sendBtn" class="action-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="file.js"></script>
+</body>
+</html>

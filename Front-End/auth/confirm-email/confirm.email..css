@@ -1,0 +1,171 @@
+:root {
+  --primary: #2d6a4f;
+  --hover-green: #1b4332;
+  --bg-color: #f0f7f4;
+  --error-red: #e63946;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.auth-box {
+  background: white;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  width: 380px;
+  text-align: center;
+}
+
+.icon-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.logo {
+  height: 80px;
+  border-radius: 50%;
+  object-fit: contain;
+  width: 100px;
+}
+
+h2 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box; /* عشان الـ padding ما يطلّعش الـ input بره الـ box */
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px rgba(45, 106, 79, 0.1);
+}
+
+#otp {
+  text-align: center;
+  letter-spacing: 8px;
+  font-weight: bold;
+  font-size: 24px;
+  border: 2px solid var(--primary);
+  background-color: #f9fdfb;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-btn:hover {
+  background: var(--hover-green);
+  transform: translateY(-2px);
+}
+.auth-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.timer-style {
+  background: #fff5f5;
+  color: #e53e3e;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 14px;
+  border: 1px solid #fed7d7;
+}
+
+.footer-text {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #888;
+}
+.resend {
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* === كود الـ Toast الضروري جداً === */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+.toast {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  min-width: 250px;
+  animation: slideIn 0.5s ease-out forwards;
+  border-left: 5px solid transparent;
+}
+.toast.success {
+  border-left-color: var(--primary);
+  color: #1b4332;
+}
+.toast.error {
+  border-left-color: var(--error-red);
+  color: #85141b;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.toast.fade-out {
+  animation: fadeOut 0.5s ease-in forwards;
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
