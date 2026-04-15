@@ -33,7 +33,7 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 
 ---
 
-## 📊 Use Case Diagram
+## Use Case Diagram
 ```mermaid
 graph TD
     User((User)) -->|Uploads Image| System[FLORA System]
@@ -45,24 +45,24 @@ graph TD
 
 ---
 
-## 📈 Activity Diagram
+## Activity Diagram
 ```mermaid
 stateDiagram-v2
-    [*] --> UploadImage: User selects & uploads photo
-    UploadImage --> Processing: Backend receives image
-    Processing --> ML_Analysis: Image passed to CNN Model
-    ML_Analysis --> ResultExtraction: Model identifies Disease
-    ResultExtraction --> Ollama_Context: Disease Name sent to Chatbot
-    Ollama_Context --> GenerateResponse: Ollama formulates treatment advice
-    GenerateResponse --> DisplayUI: Results & Chat window shown to User
-    DisplayUI --> UserChat: User asks follow-up questions
+    [*] --> UploadImage : User selects & uploads photo
+    UploadImage --> Processing : Backend receives image
+    Processing --> ML_Analysis : Image passed to CNN Model
+    ML_Analysis --> ResultExtraction : Model identifies Disease
+    ResultExtraction --> Ollama_Context : Disease Name sent to Chatbot
+    Ollama_Context --> GenerateResponse : Ollama formulates treatment advice
+    GenerateResponse --> DisplayUI : Results & Chat window shown to User
+    DisplayUI --> UserChat : User asks follow-up questions
     UserChat --> GenerateResponse
-    DisplayUI --> [*]: User ends session
+    DisplayUI --> [*] : User ends session
 ```
 
 ---
 
-## 🏗️ Class Diagram
+## Class Diagram
 ```mermaid
 classDiagram
     class User {
@@ -118,7 +118,7 @@ classDiagram
 
 ---
 
-## 👥 Team
+## Team
 * **Ahmed Waleed** – Machine Learning
 * **Mohamed Sayed** – Data Science
 * **Shehab Eissa** – Frontend Development
@@ -128,6 +128,6 @@ classDiagram
 
 ---
 
-## ⚠️ Important Notes
+## Important Notes
 * This project utilizes **Ollama** instead of Rasa for the chatbot implementation.
 * The backend is built using **Node.js (Express)** to ensure high performance and scalability, replacing the initial Django proposal.
