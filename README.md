@@ -1,4 +1,3 @@
-````markdown
 # FLORA: Intelligent Plant Recognition & Disease Diagnosis System
 
 ## Project Overview
