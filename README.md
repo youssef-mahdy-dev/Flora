@@ -1,3 +1,4 @@
+````markdown
 # FLORA: Intelligent Plant Recognition & Disease Diagnosis System
 
 ## Project Overview
@@ -41,7 +42,12 @@ graph TD
     ML -->|Sends Disease Name| Chatbot[Chatbot: Ollama LLM]
     User -->|Asks Questions| Chatbot
     Chatbot -->|Diagnosis & Treatment Response| User
+```
 
+---
+
+## 📈 Activity Diagram
+```mermaid
 stateDiagram-v2
     [*] --> UploadImage: User selects & uploads photo
     UploadImage --> Processing: Backend receives image
@@ -53,7 +59,12 @@ stateDiagram-v2
     DisplayUI --> UserChat: User asks follow-up questions
     UserChat --> GenerateResponse
     DisplayUI --> [*]: User ends session
+```
 
+---
+
+## 🏗️ Class Diagram
+```mermaid
 classDiagram
     class User {
         +String userId
@@ -104,22 +115,20 @@ classDiagram
     FloraBackend --> OllamaChatbot : Requests Response
     FloraBackend --> Database : Persists Data
     OllamaChatbot --> User : Provides Chat/Advice
-👥 Team
+```
 
-    Ahmed Waleed – Machine Learning
+---
 
-    Mohamed Sayed – Data Science
+## 👥 Team
+* **Ahmed Waleed** – Machine Learning
+* **Mohamed Sayed** – Data Science
+* **Shehab Eissa** – Frontend Development
+* **Seif Eldeen Hamouda** – Chatbot (NLP)
+* **Seif Osama** – Chatbot (NLP)
+* **Youssef Mahdy** – Backend Development (Node.js)
 
-    Shehab Eissa – Frontend Development
+---
 
-    Seif Eldeen Hamouda – Chatbot (NLP)
-
-    Seif Osama – Chatbot (NLP)
-
-    Youssef Mahdy – Backend Development (Node.js)
-
-⚠️ Important Notes
-
-    This project utilizes Ollama instead of Rasa for the chatbot implementation.
-
-    The backend is built using Node.js (Express) to ensure high performance and scalability, replacing the initial Django proposal.
+## ⚠️ Important Notes
+* This project utilizes **Ollama** instead of Rasa for the chatbot implementation.
+* The backend is built using **Node.js (Express)** to ensure high performance and scalability, replacing the initial Django proposal.
