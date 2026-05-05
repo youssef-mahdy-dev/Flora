@@ -32,6 +32,90 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 5. **Interactive Support:** Ollama processes the diagnosis and initiates a conversation with the user, providing treatment advice and answering follow-up questions.
 
 ---
+## Sequence Diagram
+```mermaid
+sequenceDiagram
+    actor User
+    participant FE as Frontend
+    participant BE as Node.js Backend
+    participant ML as ML Model (Flask)
+    participant OL as Ollama (Llama 3)
+
+    User->>FE: Upload plant image
+    FE->>BE: POST /api/predict (multipart)
+    BE->>ML: Forward image for inference
+    ML-->>BE: Disease name + confidence score
+    BE->>OL: Send disease context prompt
+    OL-->>BE: Treatment advice response
+    BE-->>FE: Combined JSON response
+    FE-->>User: Display results + chat
+    User->>FE: Ask follow-up question
+    FE->>BE: POST /api/chat
+    BE->>OL: Forward message + context
+    OL-->>BE: Chat reply
+    BE-->>FE: JSON reply
+    FE-->>User: Display chatbot response
+```
+## Component Diagram
+```mermaid
+graph TB
+    subgraph Frontend["Frontend (HTML/CSS/JS)"]
+        UI[Upload UI]
+        RP[Results Panel]
+        CB[Chatbot UI]
+    end
+
+    subgraph Backend["Node.js Backend (Express :3000)"]
+        RT[Express Router]
+        MU[Multer Upload]
+        ML_P[ML Proxy]
+        OL_C[Ollama Client]
+    end
+
+    subgraph AI["AI Services"]
+        FL["Flask Inference Server\n(TensorFlow/PyTorch :5000)"]
+        OL["Ollama Runtime\n(Llama 3 :11434)"]
+    end
+
+    subgraph Data["Data & Models"]
+        DS[(PlantVillage Dataset)]
+        MW[(CNN Weights .h5)]
+        CI[(class_indices.json)]
+    end
+
+    Frontend -->|REST HTTP| Backend
+    ML_P -->|HTTP POST| FL
+    OL_C -->|HTTP POST| OL
+    Backend -->|loads| Data
+    FL -->|reads| MW
+    FL -->|reads| CI
+```
+## Deployment Diagram
+```mermaid
+graph TB
+    subgraph Device["«device» User Browser"]
+        WEB[index.html / app.js]
+    end
+
+    subgraph Server["«node» Local Machine / Server"]
+        subgraph P1["«process» node app.js — port 3000"]
+            EX[Express + Multer + Axios]
+        end
+        subgraph P2["«process» inference_server.py — port 5000"]
+            FL[Flask + TensorFlow + Pillow]
+        end
+        subgraph P3["«process» ollama run llama3 — port 11434"]
+            LL[Llama 3 8B Model]
+        end
+        FS[("«filesystem»\nmodels/ · dataset/ · uploads/ · .env")]
+    end
+
+    WEB -->|HTTP :3000| EX
+    EX -->|HTTP :5000| FL
+    EX -->|HTTP :11434| LL
+    FL -->|reads| FS
+    EX -->|temp writes| FS
+```
 
 ## Use Case Diagram
 ```mermaid
@@ -42,30 +126,6 @@ graph TD
     User -->|Asks Questions| Chatbot
     Chatbot -->|Diagnosis & Treatment Response| User
 ```
----
-## sequenceDiagram
-    participant U as User
-    participant UI as Web Frontend
-    participant B as Node.js Backend
-    participant ML as ML Model
-    participant O as Ollama LLM
-
-    U->>UI: Upload Plant Photo
-    UI->>B: API Request (POST /diagnose)
-    B->>ML: Send Image for Processing
-    Note over ML: CNN analysis (TensorFlow/PyTorch)
-    ML-->>B: Return Diagnosis (Disease + Confidence)
-    B->>O: Inject Diagnosis Context
-    Note over O: Generate treatment advice
-    O-->>B: Return Advice Text
-    B-->>UI: Return JSON (Result + Chat Start)
-    UI-->>U: Display Diagnosis & Chat UI
-    U->>UI: Ask follow-up question
-    UI->>B: Send query
-    B->>O: Contextual Chat Query
-    O-->>B: Response
-    B-->>UI: Update Chat Window
-
 ---
 
 ## Activity Diagram
