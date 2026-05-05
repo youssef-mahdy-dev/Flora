@@ -35,13 +35,34 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 
 
 ## Use Case Diagram
+
 ```mermaid
-graph TD
-    User((User)) -->|Uploads Image| System[FLORA System]
-    System --> ML[ML Model: Plant/Disease CNN]
-    ML -->|Sends Disease Name| Chatbot[Chatbot: Ollama LLM]
-    User -->|Asks Questions| Chatbot
-    Chatbot -->|Diagnosis & Treatment Response| User
+graph LR
+    User(("User\n(Actor)"))
+
+    subgraph FLORA ["FLORA System Boundary"]
+        UC1(["Upload plant image"])
+        UC2(["Identify plant species"])
+        UC3(["Detect plant disease"])
+        UC4(["View diagnosis result"])
+        UC5(["Ask chatbot question"])
+        UC6(["Get treatment advice"])
+        UC7(["View confidence score"])
+        UC8(["Ask follow-up question"])
+    end
+
+    User --- UC1
+    User --- UC3
+    User --- UC5
+    User --- UC8
+
+    UC1 -. "«include»" .-> UC2
+    UC1 -. "«include»" .-> UC3
+    UC2 -. "«include»" .-> UC4
+    UC3 -. "«include»" .-> UC4
+    UC3 -. "«include»" .-> UC7
+    UC5 -. "«include»" .-> UC6
+    UC8 -. "«extend»"  .-> UC5
 ```
 ---
 
