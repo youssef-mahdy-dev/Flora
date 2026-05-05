@@ -32,6 +32,29 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 5. **Interactive Support:** Ollama processes the diagnosis and initiates a conversation with the user, providing treatment advice and answering follow-up questions.
 
 ---
+## sequenceDiagram
+    participant U as User
+    participant UI as Web Frontend
+    participant B as Node.js Backend
+    participant ML as ML Model
+    participant O as Ollama LLM
+
+    U->>UI: Upload Plant Photo
+    UI->>B: API Request (POST /diagnose)
+    B->>ML: Send Image for Processing
+    Note over ML: CNN analysis (TensorFlow/PyTorch)
+    ML-->>B: Return Diagnosis (Disease + Confidence)
+    B->>O: Inject Diagnosis Context
+    Note over O: Generate treatment advice
+    O-->>B: Return Advice Text
+    B-->>UI: Return JSON (Result + Chat Start)
+    UI-->>U: Display Diagnosis & Chat UI
+    U->>UI: Ask follow-up question
+    UI->>B: Send query
+    B->>O: Contextual Chat Query
+    O-->>B: Response
+    B-->>UI: Update Chat Window
+---
 
 ## Use Case Diagram
 ```mermaid
