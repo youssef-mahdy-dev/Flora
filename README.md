@@ -178,7 +178,7 @@ graph TB
 
     subgraph AI["AI Services"]
         FL["Flask Inference Server\n(TensorFlow/PyTorch :5000)"]
-        OL["Ollama Runtime\n(Llama 3 :11434)"]
+        OL["Ollama Runtime\n(aya  :11434)"]
     end
 
     subgraph Data["Data & Models"]
@@ -208,7 +208,7 @@ graph TB
         subgraph P2["«process» inference_server.py — port 5000"]
             FL[Flask + TensorFlow + Pillow]
         end
-        subgraph P3["«process» ollama run llama3 — port 11434"]
+        subgraph P3["«process» ollama run aya — port 11434"]
             LL[Llama 3 8B Model]
         end
         FS[("«filesystem»\nmodels/ · dataset/ · uploads/ · .env")]
