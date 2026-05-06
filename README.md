@@ -209,7 +209,7 @@ graph TB
             FL[Flask + TensorFlow + Pillow]
         end
         subgraph P3["«process» ollama run aya — port 11434"]
-            LL[Llama 3 8B Model]
+            LL[aya 8B Model]
         end
         FS[("«filesystem»\nmodels/ · dataset/ · uploads/ · .env")]
     end
