@@ -32,7 +32,7 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 5. **Interactive Support:** Ollama processes the diagnosis and initiates a conversation with the user, providing treatment advice and answering follow-up questions.
 
 ---
-
+## Use Case
 
 ![Use Case Diagram](uses_case.jpg)
 
