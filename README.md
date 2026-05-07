@@ -142,8 +142,8 @@ sequenceDiagram
     actor User
     participant FE as Frontend
     participant BE as Node.js Backend
-    participant ML as ML Model (Flask)
-    participant OL as Ollama (Llama 3)
+    participant ML as ML Model (cNN)
+    participant OL as Ollama ( aya)
 
     User->>FE: Upload plant image
     FE->>BE: POST /api/predict (multipart)
@@ -177,7 +177,7 @@ graph TB
     end
 
     subgraph AI["AI Services"]
-        FL["Flask Inference Server\n(TensorFlow/PyTorch :5000)"]
+        FL["cNN Inference Server\n(TensorFlow/PyTorch :5000)"]
         OL["Ollama Runtime\n(aya  :11434)"]
     end
 
@@ -206,7 +206,7 @@ graph TB
             EX[Express + Multer + Axios]
         end
         subgraph P2["«process» inference_server.py — port 5000"]
-            FL[Flask + TensorFlow + Pillow]
+            FL[Cnn + TensorFlow + Pillow]
         end
         subgraph P3["«process» ollama run aya — port 11434"]
             LL[aya 8B Model]
