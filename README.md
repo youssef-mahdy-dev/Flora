@@ -165,7 +165,6 @@ sequenceDiagram
 graph TB
     subgraph Frontend["Frontend (HTML/CSS/JS)"]
         UI[Upload UI]
-        RP[Results Panel]
         CB[Chatbot UI]
     end
 
