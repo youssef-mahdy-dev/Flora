@@ -36,7 +36,6 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 
 # Use Case Diagram — FLORA System
  
-> يوضح وظائف النظام من وجهة نظر المستخدم
  
 ```mermaid
 graph LR
