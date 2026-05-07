@@ -34,7 +34,7 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 ---
 
 
-![Use Case Diagram](use_case.jpg)
+![Use Case Diagram](uses_case.jpg)
 
 ---
 
