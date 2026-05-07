@@ -34,11 +34,7 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 ---
 
 
-# Use Case Diagram — FLORA System
- 
- 
-![Project Logo](https://github.com/youssef-mahdy-dev/Flora/edit/master/use_case.jpg)
- 
+![Use Case Diagram](use_case.jpg)
 
 ---
 
