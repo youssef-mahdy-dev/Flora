@@ -181,7 +181,7 @@ graph TB
     end
 
     subgraph Data["Data & Models"]
-        DS[(PlantVillage Dataset)]
+        
         MW[(CNN Weights .h5)]
         CI[(class_indices.json)]
     end
