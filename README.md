@@ -34,28 +34,30 @@ FLORA is an AI-powered system designed to assist users in identifying plants, de
 ---
 
 
-## Use Case Diagram
-
+# Use Case Diagram — FLORA System
+ 
+> يوضح وظائف النظام من وجهة نظر المستخدم
+ 
 ```mermaid
 graph LR
-    User(("User\n(Actor)"))
-
-    subgraph FLORA ["FLORA System Boundary"]
-        UC1(["Upload plant image"])
-        UC2(["Identify plant species"])
-        UC3(["Detect plant disease"])
-        UC4(["View diagnosis result"])
-        UC5(["Ask chatbot question"])
-        UC6(["Get treatment advice"])
-        UC7(["View confidence score"])
-        UC8(["Ask follow-up question"])
+    User(["👤 User\n(Actor)"])
+ 
+    subgraph FLORA ["🌿 FLORA System Boundary"]
+        UC1(["Upload\nplant image"])
+        UC2(["Identify\nplant species"])
+        UC3(["Detect\nplant disease"])
+        UC4(["View\ndiagnosis result"])
+        UC5(["Ask chatbot\nquestion"])
+        UC6(["Get treatment\nadvice"])
+        UC7(["View\nconfidence score"])
+        UC8(["Ask follow-up\nquestion"])
     end
-
+ 
     User --- UC1
     User --- UC3
     User --- UC5
     User --- UC8
-
+ 
     UC1 -. "«include»" .-> UC2
     UC1 -. "«include»" .-> UC3
     UC2 -. "«include»" .-> UC4
@@ -64,6 +66,8 @@ graph LR
     UC5 -. "«include»" .-> UC6
     UC8 -. "«extend»"  .-> UC5
 ```
+ 
+
 ---
 
 ## Activity Diagram
